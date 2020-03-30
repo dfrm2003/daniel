@@ -1,0 +1,12 @@
+##PORTUGUESE##
+letra = input('Digite uma letra: ') # foi criada uma variável 'letra'
+print('Seu valor decimal é: ',ord(letra))
+print('Seu valor hexadecimal é: ',hex(ord(letra)))
+print('Seu valor binário: ',bin(ord(letra)))
+
+## ENGLISH ##
+
+letter = input ('Type a letter:') # a 'letter' variable was created
+print ('The decimal value is:', ord (letter))
+print ('The hexadecimal value is:', hex (ord (letter)))
+print ('The binary value:', bin (ord (letter)))
