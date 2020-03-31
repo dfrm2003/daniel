@@ -1,0 +1,9 @@
+def mdc (dividendo, divisor):
+    while divisor != 0:
+        resto = dividendo % divisor
+        dividendo = divisor
+        divisor = resto
+    return dividendo
+
+mdc(10,4)
+#examples: dividend - 10 and divider - 4 
