@@ -1,3 +1,8 @@
+#===========================
+#Portuguese
+
+a = int(input('Digite um número referente ao dividendo: '))
+b = int(input('Digite o número referente ao divisor: '))
 def mdc (dividendo, divisor):
     while divisor != 0:
         resto = dividendo % divisor
@@ -5,5 +10,18 @@ def mdc (dividendo, divisor):
         divisor = resto
     return dividendo
 
-mdc(10,4)
-#examples: dividend - 10 and divider - 4 
+mdc(a,b)
+
+#===========================
+#English
+
+a = int(input('Type the dividend number: '))
+b = int(input('Type the divisor: '))
+def mdc (dividend, divisor):
+    while divisor != 0:
+        remainder = dividend % divisor
+        dividend = divisor
+        divisor = remainder
+    return dividend
+
+mdc(a,b)
