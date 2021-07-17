@@ -1,0 +1,191 @@
+// App.js
+
+import * as React from 'react';
+import { Text, View, StyleSheet } from 'react-native';
+import Constants from 'expo-constants';
+
+
+// or any pure javascript modules available in npm
+import {TextInput, Button} from 'react-native-paper';
+
+export default class App extends React.Component { //declaração da classe
+//variáveis Globais
+//são variáveis que estão no contexto do app
+//states - variáveis que estãi no contexto do app
+
+//VALORES DAS VARIÁVEIS GLOBAIS DO APP
+state = {
+  peso: 0,
+  altura: 0,
+  imc: 0,
+  legenda: 'indeterminado',
+  cor:'#bdc3c7',
+};
+
+calcularImc = ()=>{
+
+  const resultado = this.state.peso/(this.state.altura*this.state.altura);
+
+  this.setState({// o setState() é a ponte da camada entre as funções e a camada de visualização.
+    imc:Math.ceil(resultado)
+  });
+
+    if(resultado < 18.5){
+    this.setState({
+      legenda:'Magreza',
+      cor:'#e74c3c'
+    });
+  } else if (resultado >= 18.5 && resultado < 25 ){
+    this.setState({
+      legenda:'Normal',
+      cor:'#2ecc71'
+    });
+  } else if (resultado >= 25 && resultado < 30 ){
+    this.setState({
+      legenda:'Sobrepeso',
+      cor:'#f1c40f'
+    });
+  } else if (resultado >= 30 && resultado < 40 ){
+    this.setState({
+      legenda:'Obesidade',
+      cor:'#e67e22'
+    });
+  }
+  else if (resultado >= 40){
+    this.setState({
+      legenda:'Obesidade Grave',
+      cor:'#e74c3c'
+    });
+  } else {
+    this.setState({
+      legenda:'Atenção!!! Insira um valor válido'
+    });
+  }
+}
+
+  render(){
+
+    return (
+      <View style={styles.app}>
+        <Text style={styles.legenda}>Seu IMC</Text>
+
+        <View style={[styles.painel,{backgroundColor:this.state.cor}]}>
+          <Text style={styles.resultado}>{this.state.imc}</Text>
+          <Text style={styles.diagnostico}>{this.state.legenda}</Text>
+        </View>
+        
+        <View>
+          <TextInput
+          label="Peso"
+          style={styles.peso}
+          onChangeText={value =>{
+            this.setState({
+              peso:value.replace(',','.')
+            });
+          }} />
+
+          <TextInput
+          label="Altura" 
+          style={styles.altura}
+          onChangeText={value =>{
+            this.setState({
+              altura:value.replace(',','.')
+            });
+          }}/>
+
+          <Button mode="contained" onPress={this.calcularImc}>
+          Calcular 
+          </Button>
+        </View>
+      </View>
+    );
+  }
+}
+
+
+const styles = StyleSheet.create({
+  app:{
+    padding: 20,
+    },
+  
+  painel:{
+    borderRadius: 5,
+    marginVertical: 10,
+    padding: 8,
+    width: 150,
+    alignSelf: 'center',
+  },
+
+  legenda:{
+    textAlign:'center',
+    fontWeight:'bold',
+  },
+
+  resultado:{
+    textAlign:'center',
+    fontSize:25,
+    fontWeight:'bold',
+  },
+
+  diagnostico:{
+    textAlign:'center',
+    fontSize:15, 
+  },
+
+  peso:{
+    marginVertical: 10,
+  },
+
+  altura:{
+    marginVertical: 10,
+  }
+});
+
+
+//----------------
+
+//AssetExample.js
+
+import * as React from 'react';
+import { Text, View, StyleSheet, Image } from 'react-native';
+
+export default function AssetExample() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.paragraph}>
+        Local files and assets can be imported by dragging and dropping them into the editor
+      </Text>
+      <Image style={styles.logo} source={require('../assets/snack-icon.png')} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+  },
+  paragraph: {
+    margin: 24,
+    marginTop: 0,
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  logo: {
+    height: 128,
+    width: 128,
+  }
+});
+
+//------------------
+
+//package.json
+
+{
+  "dependencies": {
+    "expo-constants": "~10.1.3",
+    "react-native-paper": "3.6.0"
+  }
+}
